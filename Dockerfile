@@ -1,18 +1,12 @@
-FROM debian:jessie
+FROM alpine:latest
 
-RUN apt-get update && apt-get install -y \
-  build-essential \
-  curl \
-  locales \
-  nodejs \
-  nodejs-legacy \
-  nodejs-dev \
-  npm \
-  ruby \
-  ruby-dev \
-  && gem install listen sass compass scss-lint \
-  && npm install -g npm@latest \
-  && npm install -g grunt-cli
+ENV NODE_PATH /install/node_modules/
+ENV PATH /install/node_modules/.bin:$PATH
+
+RUN apk --update add autoconf automake libtool nasm build-base git nodejs ruby ruby-dev nodejs-dev npm && \
+  rm -rf /var/cache/apk/* && \
+  npm install -g grunt-cli && \
+  gem install listen sass compass scss_lint --no-document
 
 WORKDIR /srv
 VOLUME /srv
