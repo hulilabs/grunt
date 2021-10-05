@@ -1,9 +1,9 @@
-FROM alpine:latest
+FROM alpine:3.9
 
 ENV NODE_PATH /install/node_modules/
 ENV PATH /install/node_modules/.bin:$PATH
 
-RUN apk --update add autoconf automake libtool nasm build-base git nodejs python ruby ruby-dev nodejs-dev npm zlib-dev && \
+RUN apk --update add autoconf automake ca-certificates libtool nasm build-base git nodejs python3 ruby ruby-dev nodejs-dev npm zlib-dev && \
   npm i npm@latest -g && \
   rm -rf /var/cache/apk/* && \
   npm install -g grunt-cli && \
